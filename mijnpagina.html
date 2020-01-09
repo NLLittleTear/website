@@ -1,0 +1,138 @@
+<!DOCTYPE html!>
+<html lang="nl">
+	<head>
+		<meta charset="utf-8">
+		<title>Mijn pagina</title>
+		<script language="javascript">
+			eersteRonde = true
+			function dobbel() {
+				canvasRuimte = document.getElementById('canvas').getContext('2d');
+				canvasRuimte.clearRect(0,0,400,300);
+				canvasRuimte.font = 'italic 30px sans-serif';
+				canvasRuimte.fillStyle = 'BLACK';
+				
+				worp1 = Math.floor(6*Math.random())+1;
+				
+				worp2 = Math.floor(6*Math.random())+1;
+				
+				worpTotaal = Math.floor(worp1 + worp2);	
+				
+			if (eersteRonde == true) {
+				canvasRuimte.fillText ("De eerste ronde!", 10, 30);
+				canvasRuimte.fillText ("Geworpen: "+worpTotaal, 10, 65);
+				
+				if (worpTotaal == 7 || worpTotaal == 11) {
+					canvasRuimte.fillText ("Je hebt gewonnen!", 10, 250); 
+				} else {
+					spelersPunt = worpTotaal;
+					eersteRonde == false;
+					}
+				} else {
+				canvasRuimte.fillText ("De tweede ronde!", 10, 30);
+				canvasRuimte.fillText ("Spelerspunt: "+spelersPunt+" Geworpen: "+worpTotaal, 10, 65);
+					if (worpTotaal == 7) {
+					canvasRuimte.fillText ("Je hebt verloren!", 10, 250);
+					eersteRonde == true;
+					} else {
+						if (worpTotaal == spelersPunt) {
+						canvasRuimte.fillText ("Je hebt gewonnen!", 10, 250);
+						eersteRonde == true
+						} else {
+						canvasRuimte.fillText ("Doorgaan!", 10, 250)
+						}
+					}
+				};
+				
+				tekenDobbelsteen(worp1,60);
+				tekenDobbelsteen(worp2,200);
+				
+			}
+			
+			function tekenDobbelsteen() {
+				canvasRuimte = document.getElementById('canvas').getContext('2d');
+				canvasRuimte.lineWidth = 5;
+				canvasRuimte.strokeRect(10,100,100,100);
+			}
+			
+			function tekenDobbelsteen(worp, middenX) {
+			
+				middenY = 150;
+				canvasRuimte.lineWidth = 5;
+			
+				canvasRuimte.strokeRect(middenX-50,middenY-50,100,100);
+			
+			
+			switch(worp) {
+			
+			//1
+				case 1:
+				tekenOog(middenX,middenY);
+				break;
+			
+			//2
+				case 2: 
+				tekenOog(middenX-30,middenY-30);
+				tekenOog(middenX+30,middenY+30);
+				break;
+			
+			// 3
+				case 3: 
+				tekenOog(middenX-30,middenY-30);
+				tekenOog(middenX,middenY);
+				tekenOog(middenX+30,middenY+30);
+				break;
+			
+			//4
+				case 4:
+				tekenOog(middenX-30,middenY-30);
+				tekenOog(middenX+30,middenY-30);
+				tekenOog(middenX-30,middenY+30);
+				tekenOog(middenX+30,middenY+30);
+				break;
+			
+			//5
+				case 5:
+				tekenOog(middenX,middenY);
+				tekenOog(middenX-30,middenY-30);
+				tekenOog(middenX+30,middenY-30);
+				tekenOog(middenX-30,middenY+30);
+				tekenOog(middenX+30,middenY+30);
+				break;
+			
+			//6
+				case 6:
+				tekenOog(middenX-30,middenY-30);
+				tekenOog(middenX+30,middenY-30);
+				tekenOog(middenX-30,middenY+30);
+				tekenOog(middenX+30,middenY+30);
+				tekenOog(middenX-30,middenY);
+				tekenOog(middenX+30,middenY);
+				break;
+		}
+}
+
+
+			function tekenOog(posX, posY) {
+
+			canvasRuimte.fillStyle = "BLUE";
+ 
+			canvasRuimte.beginPath();
+
+			canvasRuimte.arc(posX,posY,10,0,2*Math.PI,true);
+ 
+			canvasRuimte.closePath();
+
+			canvasRuimte.fill();
+}
+
+		</script>
+	</head>
+	<body>
+		<p>
+			<button style="height: 25px; width: 250px" onClick="dobbel();">Dobbelen!</button>
+		</p>
+		<canvas id="canvas" width="400" height="300">
+		Dit is het tekengedeelte
+		</canvas>
+	</body>
+</html>
